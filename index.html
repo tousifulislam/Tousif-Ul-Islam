@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tousif Ul Islam — Software Engineer</title>
+    <title>Tousif Ul Islam — Software Engineer | Portfolio</title>
     <link rel="stylesheet" href="index.css">
     <style>
       :root {
@@ -371,6 +371,44 @@
         font-size: 13px;
         flex-shrink: 0;
       }
+
+
+      /* ── PERSONAL PROFILE ── */
+      .profile-panel{background:linear-gradient(145deg,rgba(19,22,29,.9),rgba(13,16,22,.74));border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:28px;box-shadow:0 28px 80px rgba(0,0,0,.34);backdrop-filter:blur(22px)}
+      .profile-avatar{width:92px;height:92px;border-radius:22px;overflow:hidden;border:1px solid rgba(200,245,62,.24);margin-bottom:18px}
+      .profile-avatar img{width:100%;height:100%;display:block;object-fit:cover}
+      .profile-kicker{display:inline-block;color:var(--accent);font-size:10px;text-transform:uppercase;letter-spacing:.14em;margin-bottom:7px}
+      .profile-copy h2{font-family:"Syne",sans-serif;font-size:28px;line-height:1.08;letter-spacing:-.8px;margin-bottom:7px}
+      .profile-copy p{color:var(--muted);font-size:12px}
+      .profile-contact{display:grid;gap:10px;margin-top:22px;padding-top:20px;border-top:1px solid var(--border)}
+      .profile-contact-item{display:flex;align-items:center;gap:10px;color:var(--muted);text-decoration:none;font-size:11px}
+      .profile-contact-item:hover{color:var(--text)}
+      .profile-contact-item .icon{width:28px;height:28px;flex:0 0 28px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;background:rgba(200,245,62,.06);border:1px solid rgba(200,245,62,.14)}
+      .profile-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+      .profile-actions .btn{padding:10px 18px;font-size:11px}
+
+      /* ── PROJECT STATUS / ACTIONS ── */
+      .project-card.auto-project{cursor:default}
+      .project-card.auto-project.has-link{cursor:pointer}
+      .project-card.auto-project.has-link:hover{transform:translateY(-6px)}
+      .project-card:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+      .project-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px}
+      .project-status{display:inline-flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px;border:1px solid var(--border);color:var(--muted);background:rgba(255,255,255,.02)}
+      .project-status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+      .project-status.live{color:var(--accent);border-color:rgba(200,245,62,.24);background:rgba(200,245,62,.06)}
+      .project-status.working{color:var(--accent2);border-color:rgba(62,207,245,.24);background:rgba(62,207,245,.06)}
+      .project-status.pending{color:#f5c15b;border-color:rgba(245,193,91,.24);background:rgba(245,193,91,.06)}
+      .project-action{font-size:11px;color:var(--text);letter-spacing:.04em;opacity:.85}
+      .projects-hint{margin-top:18px;color:var(--muted);font-size:11px;text-align:center}
+      .projects-hint code{color:var(--accent2);font-family:"DM Mono",monospace}
+      .projects-hint strong{color:var(--accent)}
+
+      /* ── QUICK FACTS ── */
+      .facts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+      .fact-card{background:rgba(19,22,29,.72);border:1px solid rgba(255,255,255,.08);border-radius:var(--curve);padding:22px;box-shadow:var(--soft-shadow);backdrop-filter:blur(18px);transition:transform .25s,border-color .25s}
+      .fact-card:hover{transform:translateY(-4px);border-color:rgba(200,245,62,.22)}
+      .fact-num{display:block;font-family:"Syne",sans-serif;font-size:30px;font-weight:800;color:var(--accent);line-height:1;margin-bottom:8px}
+      .fact-label{display:block;color:var(--muted);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
 
       /* ── SECTIONS ── */
       section {
@@ -872,6 +910,21 @@
         }
       }
 
+
+      @media (max-width: 900px) {
+        .facts-grid{grid-template-columns:repeat(2,1fr)}
+      }
+      @media (max-width: 768px) {
+        .profile-panel{padding:22px}
+        .profile-actions{flex-direction:column}
+        .profile-actions .btn{width:100%;justify-content:center}
+      }
+      @media (max-width: 480px) {
+        .facts-grid{grid-template-columns:1fr}
+        .profile-avatar{width:80px;height:80px}
+        .profile-copy h2{font-size:24px}
+      }
+
       @media (max-width: 480px) {
         .hero {
           padding: 80px 20px 40px;
@@ -918,6 +971,7 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#highlights">Snapshot</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="Resume.html">Resume</a></li>
@@ -925,56 +979,42 @@
     </nav>
     <!-- HERO -->
     <section class="hero" id="about">
+      <div class="hero-right">
+        <div class="profile-panel reveal">
+          <div class="profile-avatar">
+            <img src="https://i.postimg.cc/NFpdPWTW/Whats-App-Image-2026-06-22-at-10-45-07-AM.jpg" alt="Tousif Ul Islam">
+          </div>
+          <div class="profile-copy">
+            <span class="profile-kicker">Software Engineer</span>
+            <h2>Tousif Ul Islam</h2>
+            <p>Full Stack Developer · AI & Web Applications</p>
+          </div>
+          <div class="profile-contact">
+            <a href="mailto:tousifyy002@gmail.com" class="profile-contact-item"><span class="icon">✉️</span><span>tousifyy002@gmail.com</span></a>
+            <a href="tel:+923295450852" class="profile-contact-item"><span class="icon">📞</span><span>+92-329-5450852</span></a>
+            <a href="#contact" class="profile-contact-item"><span class="icon">📍</span><span>Rawalpindi / Islamabad, Pakistan</span></a>
+            <a href="#education" class="profile-contact-item"><span class="icon">🎓</span><span>PMAS Arid Agriculture University</span></a>
+          </div>
+          <div class="profile-actions">
+            <a class="btn btn-primary" href="#projects">Explore Work →</a>
+            <a class="btn btn-outline" href="Resume.html">Resume ↗</a>
+          </div>
+        </div>
+      </div>
+
       <div class="hero-left">
         <div class="hero-tag">WELCOME TO MY PORTFOLIO</div>
         <h1>Tousif<br /><span>Ul Islam</span></h1>
         <p class="hero-desc">
           Full Stack Developer with hands-on experience building responsive web
-          applications, AI assistants, and developer networking platforms.
-          Proficient in JavaScript, Python, C#, Next.js, and Node.js with a
-          strong foundation in front-end and back-end development.
+          applications, AI assistants, developer platforms, and modern digital
+          experiences. Focused on clean architecture, strong UI, and practical
+          software solutions.
         </p>
         <div class="hero-btns">
           <a href="#projects" class="btn btn-primary">View Projects →</a>
-          <a href="Resume.html" class="btn btn-outline">View Resume</a>
+          <a href="#contact" class="btn btn-outline">Let's Connect</a>
         </div>
-      </div>
-
-      <div class="hero-right">
-        <div class="stat-grid">
-          <div class="stat-card">
-            <span class="num">8+</span>
-            <span class="label">Projects Built</span>
-          </div>
-          <div class="stat-card">
-            <span class="num">3+</span>
-            <span class="label">Languages</span>
-          </div>
-          <div class="stat-card">
-            <span class="num">2023</span>
-            <span class="label">BSc Started</span>
-          </div>
-          <div class="stat-card">
-            <span class="num">2</span>
-            <span class="label">Internships</span>
-          </div>
-        </div>
-        
-        <div class="contact-pill">
-          <div class="contact-item">
-            <span class="icon">📍</span> Rawalpindi / Islamabad, Pakistan
-          </div>
-          <div class="contact-item">
-            <span class="icon">✉️</span> tousifyy002@gmail.com
-          </div>
-          <div class="contact-item">
-            <span class="icon">📞</span> +92-329-5450852
-          </div>
-          <div class="contact-item">
-            <span class="icon">🎓</span> PMAS Arid Agriculture University
-          </div>
-        </div>
-        
       </div>
     </section>
 
@@ -1113,136 +1153,85 @@
       <div class="section-label reveal">What I've Built</div>
       <h2 class="section-title reveal">Projects</h2>
 
-      <div class="projects-grid">
-        <div class="project-card reveal">
+      <div class="projects-grid" id="projectGrid">
+        <article class="project-card reveal auto-project" data-project-url="" data-status="working">
           <span class="project-num">01 - Featured</span>
           <h3>DevConnect - Developer Networking Platform</h3>
-          <p>
-            Built a LinkedIn-like developer networking platform using Next.js
-            and Node.js, featuring user authentication, profile creation,
-            interactive posts, real-time updates, and a fully responsive UI for
-            seamless developer communication and collaboration.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">Next.js</span>
-            <span class="tech-tag">Node.js</span>
-            <span class="tech-tag">Authentication</span>
-            <span class="tech-tag">Real-time Updates</span>
-          </div>
-        </div>
+          <p>Built a LinkedIn-like developer networking platform using Next.js and Node.js with authentication, profiles, interactive posts, real-time updates, and a responsive experience for developer collaboration.</p>
+          <div class="project-tech"><span class="tech-tag">Next.js</span><span class="tech-tag">Node.js</span><span class="tech-tag">Authentication</span><span class="tech-tag">Real-time Updates</span></div>
+          <div class="project-footer"><span class="project-status"></span><span class="project-action"></span></div>
+        </article>
 
-        <div class="project-card reveal">
+        <article class="project-card reveal auto-project" data-project-url="" data-status="working">
           <span class="project-num">02 - Featured</span>
           <h3>Crazy.AI - AI Assistant</h3>
-          <p>
-            Developed a fully functional AI assistant using HTML, CSS,
-            JavaScript, Next.js, and Node.js, capable of handling user queries,
-            generating intelligent responses, and performing conversational
-            tasks with a smooth interactive user experience.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">HTML</span>
-            <span class="tech-tag">CSS</span>
-            <span class="tech-tag">JavaScript</span>
-            <span class="tech-tag">Next.js</span>
-            <span class="tech-tag">Node.js</span>
-          </div>
-        </div>
+          <p>Developed an interactive AI assistant using HTML, CSS, JavaScript, Next.js, and Node.js for conversational queries, intelligent responses, and a polished user experience.</p>
+          <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Next.js</span><span class="tech-tag">Node.js</span></div>
+          <div class="project-footer"><span class="project-status"></span><span class="project-action"></span></div>
+        </article>
 
-        <div class="project-card reveal">
+        <article class="project-card reveal auto-project" data-project-url="" data-status="pending">
           <span class="project-num">03</span>
           <h3>Student Management System</h3>
-          <p>
-            Built a web-based student management system using C# (.NET) with
-            HTML, CSS, and JavaScript, allowing users to add, update, delete,
-            and view student records including names, IDs, courses, and grades.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">C#</span>
-            <span class="tech-tag">.NET</span>
-            <span class="tech-tag">HTML</span>
-            <span class="tech-tag">CSS</span>
-            <span class="tech-tag">JavaScript</span>
-          </div>
-        </div>
+          <p>Built a C# (.NET) CRUD application for creating, updating, deleting, and viewing student records such as IDs, courses, names, and grades through a clean management workflow.</p>
+          <div class="project-tech"><span class="tech-tag">C#</span><span class="tech-tag">.NET</span><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+          <div class="project-footer"><span class="project-status"></span><span class="project-action"></span></div>
+        </article>
 
-        <div class="project-card reveal">
+        <article class="project-card reveal auto-project" data-project-url="" data-status="pending">
           <span class="project-num">04</span>
           <h3>Parallel Sorting Desktop Application</h3>
-          <p>
-            Designed and implemented a desktop application in Python that
-            demonstrates and compares multiple parallel sorting algorithms,
-            visualizing sorting performance and efficiency across different
-            dataset sizes.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Algorithms</span>
-            <span class="tech-tag">Desktop App</span>
-          </div>
-        </div>
+          <p>Designed a Python desktop application to compare sorting approaches and visualize performance across dataset sizes, demonstrating algorithm efficiency and parallel processing concepts.</p>
+          <div class="project-tech"><span class="tech-tag">Python</span><span class="tech-tag">Algorithms</span><span class="tech-tag">Desktop App</span></div>
+          <div class="project-footer"><span class="project-status"></span><span class="project-action"></span></div>
+        </article>
 
-        <div class="project-card reveal">
+        <article class="project-card reveal auto-project" data-project-url="" data-status="pending">
           <span class="project-num">05</span>
           <h3>Todo List App</h3>
-          <p>
-            Developed an interactive Todo List application using HTML5, CSS3,
-            and JavaScript with features for adding, editing, deleting, and
-            marking tasks as complete with local storage persistence.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">HTML5</span>
-            <span class="tech-tag">CSS3</span>
-            <span class="tech-tag">JavaScript</span>
-            <span class="tech-tag">Local Storage</span>
-          </div>
-        </div>
+          <p>Developed a responsive Todo List app with task creation, editing, deletion, completion tracking, and local-storage persistence for a simple everyday task-management workflow.</p>
+          <div class="project-tech"><span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Local Storage</span></div>
+          <div class="project-footer"><span class="project-status"></span><span class="project-action"></span></div>
+        </article>
 
-        <div class="project-card reveal">
+        <article class="project-card reveal auto-project" data-project-url="" data-status="pending">
           <span class="project-num">06</span>
           <h3>Music Player</h3>
-          <p>
-            Built a fully functional music player using HTML5, CSS3, and
-            JavaScript with play, pause, skip, volume control, and playlist
-            management features for an engaging user experience.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">HTML5</span>
-            <span class="tech-tag">CSS3</span>
-            <span class="tech-tag">JavaScript</span>
-          </div>
-        </div>
+          <p>Built a browser-based music player with play, pause, volume, track navigation, and playlist controls, wrapped in a clean and engaging front-end experience.</p>
+          <div class="project-tech"><span class="tech-tag">HTML5</span><span class="tech-tag">CSS3</span><span class="tech-tag">JavaScript</span></div>
+          <div class="project-footer"><span class="project-status"></span><span class="project-action"></span></div>
+        </article>
 
-        <div class="project-card reveal">
+        <article class="project-card reveal auto-project" data-project-url="" data-status="pending">
           <span class="project-num">07</span>
           <h3>Calculator App</h3>
-          <p>
-            Created an interactive calculator application using HTML, CSS, and
-            JavaScript supporting basic arithmetic operations with a clean,
-            responsive interface.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">HTML</span>
-            <span class="tech-tag">CSS</span>
-            <span class="tech-tag">JavaScript</span>
-          </div>
-        </div>
+          <p>Created a responsive calculator supporting core arithmetic operations with a clean interface, instant input handling, and a lightweight vanilla JavaScript implementation.</p>
+          <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+          <div class="project-footer"><span class="project-status"></span><span class="project-action"></span></div>
+        </article>
 
-        <div class="project-card reveal">
+        <article class="project-card reveal auto-project" data-project-url="" data-status="working">
           <span class="project-num">08</span>
           <h3>Image Gallery</h3>
-          <p>
-            Developed a responsive image gallery application using HTML, CSS,
-            and JavaScript with image categorization, lightbox preview, and
-            smooth navigation features.
-          </p>
-          <div class="project-tech">
-            <span class="tech-tag">HTML</span>
-            <span class="tech-tag">CSS</span>
-            <span class="tech-tag">JavaScript</span>
-            <span class="tech-tag">Lightbox</span>
-          </div>
-        </div>
+          <p>Developed a responsive image gallery with categorized content, lightbox previews, and smooth navigation interactions for a polished browsing experience across desktop and mobile screens.</p>
+          <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Lightbox</span></div>
+          <div class="project-footer"><span class="project-status"></span><span class="project-action"></span></div>
+        </article>
+      </div>
+      <p class="projects-hint reveal">Add the real URL to <code>data-project-url</code>. A valid URL automatically changes the card to <strong>Live</strong> and makes the whole card clickable.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- QUICK FACTS -->
+    <section id="highlights">
+      <div class="section-label reveal">Quick Snapshot</div>
+      <h2 class="section-title reveal">At a Glance</h2>
+      <div class="facts-grid">
+        <div class="fact-card reveal"><span class="fact-num">8+</span><span class="fact-label">Projects Built</span></div>
+        <div class="fact-card reveal"><span class="fact-num">3+</span><span class="fact-label">Programming Languages</span></div>
+        <div class="fact-card reveal"><span class="fact-num">2023</span><span class="fact-label">BSc Started</span></div>
+        <div class="fact-card reveal"><span class="fact-num">2</span><span class="fact-label">Internships</span></div>
       </div>
     </section>
 
@@ -1404,6 +1393,65 @@
         <span class="lang-badge">Punjabi</span>
       </div>
     </footer>
+
+
+    <script type="module">
+      import { animate, inView } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
+
+      const cards = document.querySelectorAll(".auto-project");
+
+      cards.forEach((card) => {
+        const url = (card.dataset.projectUrl || "").trim();
+        const requested = (card.dataset.status || "pending").toLowerCase();
+        const status = card.querySelector(".project-status");
+        const action = card.querySelector(".project-action");
+        const isLive = /^https?:\/\/[^\s]+$/i.test(url) && !url.includes("example.com");
+
+        if (isLive) {
+          status.textContent = "Live";
+          status.classList.add("live");
+          action.textContent = "View Project →";
+          card.classList.add("has-link");
+          card.tabIndex = 0;
+          card.setAttribute("role", "link");
+
+          const open = () => window.open(url, "_blank", "noopener,noreferrer");
+          card.addEventListener("click", (e) => {
+            if (!e.target.closest("a")) open();
+          });
+          card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              open();
+            }
+          });
+        } else {
+          const working = requested === "working";
+          status.textContent = working ? "Working" : "Pending";
+          status.classList.add(working ? "working" : "pending");
+          action.textContent = working ? "In Development" : "Link Coming Soon";
+        }
+      });
+
+      inView(".auto-project", (element) => {
+        animate(element, { opacity:[0,1], y:[24,0], scale:[0.985,1] }, { duration:.62 });
+      });
+
+      inView(".fact-card", (element) => {
+        animate(element, { opacity:[0,1], y:[18,0] }, { duration:.5 });
+      });
+
+      const profile = document.querySelector(".profile-panel");
+      if (profile) {
+        animate(profile, { opacity:[0,1], x:[28,0], scale:[.98,1] },
+          { duration:.75, type:"spring", stiffness:140, damping:20 });
+      }
+
+      document.querySelectorAll(".auto-project.has-link").forEach((card) => {
+        card.addEventListener("mouseenter", () => animate(card, { y:-6, scale:1.012 }, { duration:.2 }));
+        card.addEventListener("mouseleave", () => animate(card, { y:0, scale:1 }, { duration:.25 }));
+      });
+    </script>
 
     <script>
       const canvas = document.querySelector(".particle-canvas");
