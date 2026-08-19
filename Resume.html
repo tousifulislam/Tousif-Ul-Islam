@@ -350,50 +350,70 @@
         </div>
     </div>
 
-    <!-- PDF Download Script -->
-    <script>
-        async function generatePDF() {
-            const element = document.getElementById('resume-container');
-            const button = document.querySelector('.download-btn');
+   <!-- PDF Download Script -->
+<script>
+    async function generatePDF() {
+        const element = document.getElementById('resume-container');
+        const button = document.querySelector('.download-btn');
 
-            try {
-                button.disabled = true;
-                button.textContent = 'Preparing PDF...';
+        try {
+            button.disabled = true;
+            button.textContent = 'Preparing PDF...';
 
-                const opt = {
-                    margin: 0,
-                    filename: 'Tousif_Ul_Islam_Resume.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: {
-                        scale: 2,
-                        useCORS: true,
-                        allowTaint: false,
-                        logging: false,
-                        backgroundColor: '#ffffff',
-                        scrollX: 0,
-                        scrollY: 0
-                    },
-                    jsPDF: {
-                        unit: 'px',
-                        format: [850, 1100],
-                        orientation: 'portrait',
-                        compress: true
-                    },
-                    pagebreak: {
-                        mode: ['css', 'legacy'],
-                        avoid: ['.section-title', 'li']
-                    }
-                };
-
-                await html2pdf().set(opt).from(element).save();
-            } catch (error) {
-                console.error('Resume PDF generation failed:', error);
-                alert('Unable to generate the PDF. Please try again.');
-            } finally {
-                button.disabled = false;
-                button.textContent = 'Download PDF';
+            // CORS issue bypass karne ke liye profile image ko convert karna
+            const img = element.querySelector('img');
+            if (img && img.src.startsWith('http')) {
+                try {
+                    const response = await fetch(img.src);
+                    const blob = await response.blob();
+                    const reader = new FileReader();
+                    await new Promise((resolve) => {
+                        reader.onloadend = () => {
+                            img.src = reader.result;
+                            resolve();
+                        };
+                        reader.readAsDataURL(blob);
+                    });
+                } catch (e) {
+                    console.warn('Image fetch failed, continuing without conversion:', e);
+                }
             }
+
+            const opt = {
+                margin: 0,
+                filename: 'Tousif_Ul_Islam_Resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    logging: false,
+                    backgroundColor: '#ffffff',
+                    scrollX: 0,
+                    scrollY: 0
+                },
+                jsPDF: {
+                    unit: 'px',
+                    format: [850, 1100],
+                    orientation: 'portrait',
+                    compress: true
+                },
+                pagebreak: {
+                    mode: ['css', 'legacy'],
+                    avoid: ['.section-title', 'li']
+                }
+            };
+
+            await html2pdf().set(opt).from(element).save();
+        } catch (error) {
+            console.error('Resume PDF generation failed:', error);
+            alert('Unable to generate the PDF. Please try again.');
+        } finally {
+            button.disabled = false;
+            button.textContent = 'Download PDF';
         }
+    }
+</script>
     </script>
 </body>
 </html>
