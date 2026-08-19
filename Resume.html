@@ -117,8 +117,23 @@
             }
             #resume-container {
                 box-shadow: none !important;
-                width: 100% !important;
-                margin: 0 !important;
+                width: 850px !important;
+                min-width: 850px !important;
+                max-width: 850px !important;
+                margin: 0 auto !important;
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: stretch !important;
+            }
+
+            #resume-container > .w-[33%] {
+                width: 33% !important;
+                flex: 0 0 33% !important;
+            }
+
+            #resume-container > .w-[67%] {
+                width: 67% !important;
+                flex: 0 0 67% !important;
             }
         }
     </style>
@@ -299,19 +314,35 @@
                 <div class="grid grid-cols-1 gap-2.5 text-[11px]">
                     <div>
                         <p class="font-bold text-slate-900">DevConnect – Developer Platform</p>
-                        <p class="text-slate-600 text-[10.5px]">LinkedIn-like platform with Next.js, Node.js, authentication, and real-time feed.</p>
+                        <p class="text-slate-600 text-[10.5px] leading-relaxed">LinkedIn-inspired developer networking platform with profiles, posts, authentication, recruiter-focused features, and a real-time style feed. Built to connect students, developers, recruiters, and freelancers in one professional ecosystem.</p>
                     </div>
                     <div>
                         <p class="font-bold text-slate-900">Crazy.AI – Conversational Assistant</p>
-                        <p class="text-slate-600 text-[10.5px]">Interactive AI assistant web app built using JavaScript, Next.js, and Node.js API integration.</p>
+                        <p class="text-slate-600 text-[10.5px] leading-relaxed">AI-powered conversational web application with chat sessions, model/provider integration, markdown responses, memory, search, and developer-focused assistance. Designed as a scalable foundation for an AI SaaS platform.</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-900">Spotify Clone – Full Stack Music Platform</p>
+                        <p class="text-slate-600 text-[10.5px] leading-relaxed">Full-stack music streaming style application featuring modern UI, playlists, track browsing, responsive layouts, and backend integration. Focused on recreating a production-style media experience with clean component structure.</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-900">Portfolio Website – Developer Portfolio</p>
+                        <p class="text-slate-600 text-[10.5px] leading-relaxed">Responsive personal portfolio showcasing projects, technical skills, experience, and contact information with modern animations and interactive sections. Built to present a professional developer profile across desktop and mobile devices.</p>
                     </div>
                     <div>
                         <p class="font-bold text-slate-900">Student Management System</p>
-                        <p class="text-slate-600 text-[10.5px]">C# (.NET) based CRUD application with clean database records management.</p>
+                        <p class="text-slate-600 text-[10.5px] leading-relaxed">C# (.NET) CRUD-based desktop application for managing student records, structured data, and database operations. Focused on practical object-oriented programming, validation, and organized record management.</p>
                     </div>
                     <div>
                         <p class="font-bold text-slate-900">Parallel Sorting Analyzer</p>
-                        <p class="text-slate-600 text-[10.5px]">Python desktop app visualizing parallel sorting performance metrics across datasets.</p>
+                        <p class="text-slate-600 text-[10.5px] leading-relaxed">Python desktop application for comparing sorting approaches and visualizing execution performance across different datasets. Includes an interactive interface for analyzing timing and algorithm behavior.</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-900">Interactive Music Player</p>
+                        <p class="text-slate-600 text-[10.5px] leading-relaxed">Responsive browser-based music player built with HTML, CSS, and JavaScript, including playback controls, track navigation, progress handling, and a polished user interface for an engaging listening experience.</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-900">Image Gallery & Calculator Apps</p>
+                        <p class="text-slate-600 text-[10.5px] leading-relaxed">Collection of interactive frontend applications demonstrating DOM manipulation, event handling, responsive layouts, lightbox interactions, and reusable JavaScript logic. Built to strengthen practical frontend development and UI implementation skills.</p>
                     </div>
                 </div>
             </div>
@@ -321,18 +352,47 @@
 
     <!-- PDF Download Script -->
     <script>
-        function generatePDF() {
+        async function generatePDF() {
             const element = document.getElementById('resume-container');
-            
-            const opt = {
-                margin:       0,
-                filename:     'Tousif_Ul_Islam_Resume.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, logging: false },
-                jsPDF:        { unit: 'px', format: [850, 1100], orientation: 'portrait' }
-            };
+            const button = document.querySelector('.download-btn');
 
-            html2pdf().set(opt).from(element).save();
+            try {
+                button.disabled = true;
+                button.textContent = 'Preparing PDF...';
+
+                const opt = {
+                    margin: 0,
+                    filename: 'Tousif_Ul_Islam_Resume.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: false,
+                        logging: false,
+                        backgroundColor: '#ffffff',
+                        scrollX: 0,
+                        scrollY: 0
+                    },
+                    jsPDF: {
+                        unit: 'px',
+                        format: [850, 1100],
+                        orientation: 'portrait',
+                        compress: true
+                    },
+                    pagebreak: {
+                        mode: ['css', 'legacy'],
+                        avoid: ['.section-title', 'li']
+                    }
+                };
+
+                await html2pdf().set(opt).from(element).save();
+            } catch (error) {
+                console.error('Resume PDF generation failed:', error);
+                alert('Unable to generate the PDF. Please try again.');
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Download PDF';
+            }
         }
     </script>
 </body>
