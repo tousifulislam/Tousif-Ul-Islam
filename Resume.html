@@ -6,456 +6,312 @@
     <title>Tousif Ul Islam - Resume</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Google Fonts for clean Sans-Serif look -->
+    <!-- HTML2PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
+        * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            line-height: 1.65;
-            background:
-                radial-gradient(circle at 18% 12%, rgba(37, 99, 235, 0.22), transparent 30%),
-                radial-gradient(circle at 84% 18%, rgba(20, 184, 166, 0.16), transparent 28%),
-                linear-gradient(135deg, #070b14 0%, #111827 48%, #05070d 100%);
+            line-height: 1.5;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #334155;
         }
 
-        h1 {
-            font-weight: 800 !important;
-            letter-spacing: -0.03em;
+        /* Fixed container dimensions for standard A4 format */
+        #resume-container {
+            width: 850px;
+            min-height: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
         }
 
-        h2 {
-            font-weight: 800 !important;
-            letter-spacing: 0.12em !important;
-            color: #111827 !important;
-            border-bottom-width: 2px !important;
-            border-color: #dbe4ee !important;
+        h2.section-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #0f172a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 4px;
+            margin-bottom: 12px;
+            position: relative;
         }
 
-        h2::after {
+        h2.section-title::after {
             content: "";
-            display: block;
-            width: 44px;
-            height: 3px;
-            margin-top: 7px;
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 36px;
+            height: 2px;
+            background: #2563eb;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 10.5px;
+            font-weight: 500;
+            border-radius: 4px;
+            background-color: #f1f5f9;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+        }
+
+        .page-link, .download-btn {
+            position: fixed;
+            top: 20px;
+            z-index: 50;
+            padding: 10px 18px;
+            font-size: 13px;
+            font-weight: 600;
             border-radius: 999px;
-            background: linear-gradient(90deg, #2563eb, #14b8a6);
+            transition: all 0.2s ease;
         }
 
-        .resume-panel {
-            border-radius: 22px;
+        .download-btn {
+            left: 20px;
+            background: #2563eb;
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+            cursor: pointer;
+            border: none;
         }
 
-        .resume-sidebar {
-            background:
-                radial-gradient(circle at 12% 5%, rgba(37, 99, 235, 0.12), transparent 30%),
-                #eef4fa;
-        }
-
-        span[class*="rounded-full"] {
-            padding: 7px 12px !important;
-            font-size: 11.5px !important;
-            line-height: 1.2 !important;
-            border: 1px solid rgba(37, 99, 235, 0.14);
-            box-shadow: 0 5px 14px rgba(15, 23, 42, 0.06);
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease,
-                background 0.2s ease,
-                color 0.2s ease;
-        }
-
-        span[class*="rounded-full"]:hover {
-            transform: translateY(-2px) scale(1.04);
-            background: #2563eb !important;
-            color: #ffffff !important;
-            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
-        }
-
-        .main-content p,
-        .main-content li {
-            font-size: 13px !important;
-            line-height: 1.75 !important;
-        }
-
-        .main-content .font-bold {
-            font-weight: 800 !important;
-        }
-
-        .main-content > div {
-            padding-bottom: 6px;
-        }
-
-        .main-content ul {
-            margin-top: 10px;
-        }
-
-        .main-content li {
-            margin-bottom: 7px;
-        }
-
-        .main-content h2 + .space-y-4 > div,
-        .main-content h2 + .space-y-6 > div {
-            padding: 14px 0;
-            border-bottom: 1px solid #e5edf5;
-        }
-
-        .main-content h2 + .space-y-4 > div:last-child,
-        .main-content h2 + .space-y-6 > div:last-child {
-            border-bottom: 0;
+        .download-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
         }
 
         .page-link {
-            position: fixed;
-            top: 16px;
-            right: 16px;
-            z-index: 10;
-            border-radius: 999px;
-            background: #111827;
+            right: 20px;
+            background: #0f172a;
             color: #ffffff;
-            padding: 10px 16px;
-            font-size: 12px;
-            font-weight: 600;
             text-decoration: none;
-            box-shadow: 0 10px 25px rgba(17, 24, 39, 0.18);
+            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.3);
         }
 
         .page-link:hover {
-            background: #2563eb;
+            background: #1e293b;
         }
 
-        .download-link {
-            position: fixed;
-            top: 16px;
-            left: 16px;
-            z-index: 10;
-            border: 0;
-            border-radius: 999px;
-            background: #2563eb;
-            color: #ffffff;
-            padding: 10px 16px;
-            font-size: 12px;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.24);
-        }
-
-        .download-link:hover {
-            background: #111827;
-        }
-
+        /* Print Override */
         @media print {
             body {
-                background: #ffffff !important;
+                background: none !important;
                 padding: 0 !important;
-                display: block !important;
             }
-
-            .page-link,
-            .download-link {
+            .page-link, .download-btn {
                 display: none !important;
             }
-
-            .shadow-xl {
+            #resume-container {
                 box-shadow: none !important;
-            }
-
-            .rounded-lg {
-                border-radius: 0 !important;
+                width: 100% !important;
+                margin: 0 !important;
             }
         }
     </style>
 </head>
-<body class="py-10 px-4 min-h-screen flex justify-center items-center">
+<body class="py-8 px-4 flex justify-center items-center min-h-screen">
 
-    <button type="button" class="download-link" onclick="window.print()">Download PDF</button>
+    <button type="button" class="download-btn" onclick="generatePDF()">Download PDF</button>
     <a href="index.html" class="page-link">Open Portfolio</a>
 
-    <!-- Resume Container -->
-    <div class="resume-panel max-w-[950px] w-full bg-white shadow-xl rounded-lg overflow-hidden flex flex-col md:flex-row">
+    <!-- MAIN RESUME CONTAINER -->
+    <div id="resume-container" class="flex flex-row overflow-hidden rounded-lg">
         
-        <!-- LEFT COLUMN (Sidebar - Light Grayish Blue Background) -->
-        <div class="resume-sidebar w-full md:w-[35%] bg-[#f0f4f8] p-6 text-[#2d3748] flex flex-col gap-8 border-r border-gray-200">
+        <!-- LEFT SIDEBAR -->
+        <div class="w-[33%] bg-[#f8fafc] p-6 border-r border-slate-200 flex flex-col gap-6">
             
-            <!-- Profile Section -->
-            <div class="text-center md:text-left">
-                <!-- Profile Image Placeolder -->
-                <div class="w-32 h-32 mx-auto md:mx-0 rounded-xl overflow-hidden bg-gray-300 border-2 border-gray-400 shadow-md mb-4">
+            <!-- Profile Info -->
+            <div class="text-left">
+                <div class="w-28 h-28 rounded-xl overflow-hidden border-2 border-slate-300 mb-3 shadow-sm">
                     <img src="https://i.postimg.cc/NFpdPWTW/Whats-App-Image-2026-06-22-at-10-45-07-AM.jpg" alt="Tousif Ul Islam" class="w-full h-full object-cover">
                 </div>
-                <h1 class="text-2xl font-bold text-gray-900 tracking-wide">Tousif Ul Islam</h1>
+                <h1 class="text-xl font-bold text-slate-900 leading-tight">Tousif Ul Islam</h1>
+                <p class="text-xs text-blue-600 font-semibold tracking-wide uppercase mt-0.5">Software Engineer</p>
                 
-                <!-- Contact Info -->
-                <div class="mt-4 text-sm text-gray-600 space-y-1">
-                    <p class="hover:text-blue-600 transition"><a href="mailto:tousifyy002@gmail.com">tousifyy002@gmail.com</a></p>
+                <div class="mt-3 text-[11.5px] text-slate-600 space-y-1">
+                    <p class="flex items-center gap-1.5"><a href="mailto:tousifyy002@gmail.com" class="hover:text-blue-600">tousifyy002@gmail.com</a></p>
                     <p>+92-329-5450852</p>
-                    <p>Rawalpindi/Islamabad, Pakistan</p>
-                    <p class="hover:text-blue-600 transition"><a href="#">LinkedIn</a></p>
+                    <p>Rawalpindi/Islamabad, PK</p>
+                    <p><a href="#" class="text-blue-600 hover:underline">LinkedIn Profile</a></p>
                 </div>
             </div>
 
-            <hr class="border-gray-300">
+            <!-- Technical Skills -->
+            <div>
+                <h2 class="section-title">Technical Skills</h2>
+                
+                <div class="space-y-3">
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-500 uppercase mb-1">Languages & Core</p>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C# (.NET)</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">OOP</span>
+                            <span class="skill-tag">DSA</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-500 uppercase mb-1">Frontend</p>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="skill-tag">HTML5/CSS3</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Next.js</span>
+                            <span class="skill-tag">Tailwind CSS</span>
+                            <span class="skill-tag">UI/UX</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-500 uppercase mb-1">Backend & DB</p>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">REST APIs</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-[10px] font-bold text-slate-500 uppercase mb-1">Tools & Platforms</p>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="skill-tag">Git/GitHub</span>
+                            <span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Figma</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Certificates -->
             <div>
-                <h2 class="text-sm font-bold tracking-wider uppercase text-gray-800 mb-4">Certificates</h2>
-                <div class="space-y-4 text-xs">
+                <h2 class="section-title">Certificates</h2>
+                <div class="space-y-2 text-[11px]">
                     <div>
-                        <p class="font-semibold text-gray-900">Introduction to Cyber Security</p>
-                        <p class="text-gray-600">Urducourse</p>
+                        <p class="font-bold text-slate-800">Web Development Internship</p>
+                        <p class="text-slate-500 text-[10px]">HexSoftwares | Mar 2026 - May 2026</p>
                     </div>
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="font-semibold text-gray-900">Web Development Internship Certificate</p>
-                            <p class="text-gray-600">HexSoftwares</p>
-                        </div>
-                        <span class="text-[10px] text-gray-500 whitespace-nowrap ml-2">Mar 2026 - May 2026</span>
+                    <div>
+                        <p class="font-bold text-slate-800">Frontend Development</p>
+                        <p class="text-slate-500 text-[10px]">CodeAlpha | Feb 2026 - Mar 2026</p>
                     </div>
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="font-semibold text-gray-900">Frontend Development Internship Certificate</p>
-                            <p class="text-gray-600">CodeAlpha</p>
-                        </div>
-                        <span class="text-[10px] text-gray-500 whitespace-nowrap ml-2">Feb 2026 - Mar 2026</span>
+                    <div>
+                        <p class="font-bold text-slate-800">Intro to Cyber Security</p>
+                        <p class="text-slate-500 text-[10px]">Urducourse</p>
                     </div>
                 </div>
             </div>
-
-            <hr class="border-gray-300">
-
-            <!-- Technical Skills & Subcategories -->
-            <div>
-                <h2 class="text-sm font-bold tracking-wider uppercase text-gray-800 mb-4">Technical Skills</h2>
-                
-                <div class="space-y-4">
-                    <!-- General Skills Pills -->
-                    <div class="flex flex-wrap gap-1.5">
-                        <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-[11px] rounded-full font-medium">Project management</span>
-                        <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-[11px] rounded-full font-medium">MS office</span>
-                        <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-[11px] rounded-full font-medium">Data entry</span>
-                        <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-[11px] rounded-full font-medium">Ebooks writing</span>
-                        <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-[11px] rounded-full font-medium">Retyping documents</span>
-                        <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-[11px] rounded-full font-medium">Documents translation</span>
-                        <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-[11px] rounded-full font-medium">Fiver freelance</span>
-                    </div>
-
-                    <!-- Languages/Frameworks Badges -->
-                    <div class="flex flex-wrap gap-1.5 pt-2">
-                        <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">JavaScript</span>
-                        <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Python</span>
-                        <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">.net</span>
-                        <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">C#</span>
-                        <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">React</span>
-                        <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">C++</span>
-                        <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Python with DS and AI</span>
-                    </div>
-
-                    <!-- Frontend Development Category -->
-                    <div class="pt-2">
-                        <p class="text-[11px] font-bold text-gray-700 uppercase tracking-wide mb-1.5">Frontend Development</p>
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">HTML</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">CSS</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">UI/UX</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">JavaScript</span>
-                        </div>
-                    </div>
-
-                    <!-- Backend & Databases -->
-                    <div class="pt-2">
-                        <p class="text-[11px] font-bold text-gray-700 uppercase tracking-wide mb-1.5">Backend & Databases</p>
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Object-Oriented Programming (OOP)</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Data Structures & Algorithms</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">My SQL</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Mongo DB</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Node.js</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Authentication</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Real-time Data Handling</span>
-                        </div>
-                    </div>
-
-                    <!-- Core Concepts -->
-                    <div class="pt-2">
-                        <p class="text-[11px] font-bold text-gray-700 uppercase tracking-wide mb-1.5">Core Concepts</p>
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Problem-solving mindset</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Quick learner and adaptable</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Team collaboration and communication</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Multi-tasking</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Team work</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Time management</span>
-                        </div>
-                    </div>
-
-                    <!-- Tools & Platforms -->
-                    <div class="pt-2">
-                        <p class="text-[11px] font-bold text-gray-700 uppercase tracking-wide mb-1.5">Tools & Platforms</p>
-                        <div class="flex flex-wrap gap-1.5">
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">VS Code / any preferred IDE</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Figma</span>
-                            <span class="px-2 py-0.5 bg-gray-200 text-gray-700 text-[10px] rounded-full">Git / GitHub</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="border-gray-300">
 
             <!-- Languages -->
             <div>
-                <h2 class="text-sm font-bold tracking-wider uppercase text-gray-800 mb-3">Languages</h2>
-                <div class="flex flex-wrap gap-1.5">
-                    <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-[11px] rounded-full font-medium">English - Professional</span>
-                    <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-[11px] rounded-full font-medium">Urdu - Native</span>
-                    <span class="px-2.5 py-1 bg-blue-100 text-blue-800 text-[11px] rounded-full font-medium">Punjabi - Fluent</span>
+                <h2 class="section-title">Languages</h2>
+                <div class="text-[11px] text-slate-700 space-y-0.5">
+                    <p><span class="font-medium">English:</span> Professional</p>
+                    <p><span class="font-medium">Urdu:</span> Native</p>
+                    <p><span class="font-medium">Punjabi:</span> Fluent</p>
                 </div>
             </div>
 
         </div>
 
-        <!-- RIGHT COLUMN (Main Content Panel - White Background) -->
-        <div class="main-content w-full md:w-[65%] p-8 flex flex-col gap-8 text-[#4a5568]">
+        <!-- RIGHT MAIN CONTENT -->
+        <div class="w-[67%] p-6 flex flex-col gap-5 text-slate-700">
             
-            <!-- Summary Section -->
+            <!-- Summary -->
             <div>
-                <h2 class="text-sm font-bold tracking-wider uppercase text-gray-900 border-b pb-1 mb-3">Summary</h2>
-                <p class="text-xs leading-relaxed text-justify text-gray-700">
-                    Full Stack Developer with hands-on experience building responsive web applications, AI assistants, and developer networking platforms. Proficient in JavaScript, Python, C#, Next.js, and Node.js with a strong foundation in front-end and back-end development. Passionate about crafting intuitive user experiences, solving complex problems, and continuously expanding technical expertise. Known for delivering clean code, maintaining organized documentation, and effectively showcasing projects through professional visibility channels.
+                <h2 class="section-title">Professional Summary</h2>
+                <p class="text-[11.5px] leading-relaxed text-slate-600 text-justify">
+                    Full Stack Developer with hands-on experience building responsive web applications, AI assistants, and developer networking platforms. Proficient in JavaScript, Python, C#, Next.js, and Node.js with a strong foundation in front-end and back-end development. Passionate about crafting intuitive user experiences, solving complex problems, and delivering clean, maintainable code.
                 </p>
             </div>
 
-            <!-- Professional Experience Section -->
+            <!-- Experience -->
             <div>
-                <h2 class="text-sm font-bold tracking-wider uppercase text-gray-900 border-b pb-1 mb-4">Professional Experience</h2>
-                
-                <div class="space-y-6">
-                    <!-- Experience 1 -->
+                <h2 class="section-title">Experience</h2>
+                <div class="space-y-3.5">
                     <div>
-                        <div class="flex justify-between items-baseline text-xs mb-1">
-                            <span class="font-bold text-gray-900 text-sm">Web Development Intern</span>
-                            <span class="text-gray-500 font-medium">03/2026 – 05/2026 | Remote</span>
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-bold text-slate-900 text-[12.5px]">Web Development Intern</h3>
+                            <span class="text-[10px] text-slate-500 font-medium">03/2026 – 05/2026</span>
                         </div>
-                        <p class="text-xs text-gray-600 font-medium italic mb-2">HexSoftwares</p>
-                        <ul class="list-disc pl-4 text-xs space-y-1 text-gray-700">
-                            <li>Developed and deployed multiple web projects including a Todo list, music player, and resume website using HTML5, CSS3, and JavaScript.</li>
-                            <li>Built a responsive personal portfolio using Next.js alongside HTML, CSS, and JavaScript to showcase projects and technical skills.</li>
-                            <li>Documented project walkthroughs via screen recordings and published them on LinkedIn, building professional visibility and engagement.</li>
-                            <li>Created and maintained GitHub repositories with clean version control and accessible code documentation for all internship projects.</li>
+                        <p class="text-[11px] text-blue-600 font-medium mb-1">HexSoftwares | Remote</p>
+                        <ul class="list-disc pl-4 text-[11px] space-y-0.5 text-slate-600">
+                            <li>Developed & deployed web projects including Todo List, Music Player, and Portfolio using HTML5, CSS3, and JavaScript.</li>
+                            <li>Built responsive personal portfolio using Next.js to showcase technical capabilities.</li>
+                            <li>Documented project walkthroughs and maintained organized GitHub repositories.</li>
                         </ul>
                     </div>
 
-                    <!-- Experience 2 -->
                     <div>
-                        <div class="flex justify-between items-baseline text-xs mb-1">
-                            <span class="font-bold text-gray-900 text-sm">Frontend Developer</span>
-                            <span class="text-gray-500 font-medium">02/2026 – 03/2026 | Remote</span>
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-bold text-slate-900 text-[12.5px]">Frontend Developer Intern</h3>
+                            <span class="text-[10px] text-slate-500 font-medium">02/2026 – 03/2026</span>
                         </div>
-                        <p class="text-xs text-gray-600 font-medium italic mb-2">CodeAlpha</p>
-                        <ul class="list-disc pl-4 text-xs space-y-1 text-gray-700">
-                            <li>Developed a responsive portfolio website with an integrated contact form using EmailJS, enabling seamless message delivery from the contact section.</li>
-                            <li>Built an interactive calculator and an image gallery application using HTML, CSS, and JavaScript, showcasing core front-end development skills.</li>
-                            <li>Recorded and shared project demonstrations on LinkedIn to highlight technical capabilities and engage with the developer community.</li>
-                            <li>Maintained organized GitHub repositories with comprehensive documentation for all internship projects.</li>
+                        <p class="text-[11px] text-blue-600 font-medium mb-1">CodeAlpha | Remote</p>
+                        <ul class="list-disc pl-4 text-[11px] space-y-0.5 text-slate-600">
+                            <li>Developed portfolio website integrating EmailJS for active form handling.</li>
+                            <li>Created interactive JS applications including calculators and lightbox image galleries.</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- Education Section -->
+            <!-- Education -->
             <div>
-                <h2 class="text-sm font-bold tracking-wider uppercase text-gray-900 border-b pb-1 mb-4">Education</h2>
-                
-                <div class="space-y-4 text-xs">
-                    <!-- Edu 1 -->
+                <h2 class="section-title">Education</h2>
+                <div class="space-y-2 text-[11px]">
                     <div>
-                        <div class="flex justify-between items-baseline mb-1">
-                            <span class="font-bold text-gray-900 text-sm">BS (Software Engineering)</span>
-                            <span class="text-gray-500 font-medium">09/2023 – Present | Rawalpindi, Pakistan</span>
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-bold text-slate-900">BS (Software Engineering)</h3>
+                            <span class="text-[10px] text-slate-500">09/2023 – Present</span>
                         </div>
-                        <p class="text-gray-600">PMAS- Arid Agriculture University</p>
+                        <p class="text-slate-600">PMAS - Arid Agriculture University, Rawalpindi</p>
                     </div>
-                    <!-- Edu 2 -->
                     <div>
-                        <div class="flex justify-between items-baseline mb-1">
-                            <span class="font-bold text-gray-900 text-sm">FSc. (Pre-Engineering)</span>
-                            <span class="text-gray-500 font-medium">08/2021 – 09/2023 | Rawalpindi, Pakistan</span>
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-bold text-slate-900">FSc. (Pre-Engineering)</h3>
+                            <span class="text-[10px] text-slate-500">08/2021 – 09/2023</span>
                         </div>
-                        <p class="text-gray-600">Fauji Foundation College Matore (BISE)</p>
-                    </div>
-                    <!-- Edu 3 -->
-                    <div>
-                        <div class="flex justify-between items-baseline mb-1">
-                            <span class="font-bold text-gray-900 text-sm">Matric (Science)</span>
-                            <span class="text-gray-500 font-medium">05/2018 – 2021 | Rawalpindi, Pakistan</span>
-                        </div>
-                        <p class="text-gray-600">Government Boys high school Salgraan (BISE)</p>
+                        <p class="text-slate-600">Fauji Foundation College Matore</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Projects Section -->
+            <!-- Key Projects -->
             <div>
-                <h2 class="text-sm font-bold tracking-wider uppercase text-gray-900 border-b pb-1 mb-4">Projects</h2>
-                
-                <div class="space-y-4 text-xs">
-                    <!-- Project 1 -->
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="grid grid-cols-1 gap-2.5 text-[11px]">
                     <div>
-                        <p class="font-bold text-gray-900 text-[13px] mb-1">DevConnect – Developer Networking Platform</p>
-                        <ul class="list-disc pl-4 space-y-1 text-gray-700">
-                            <li>Built a LinkedIn-like developer networking platform using <strong>Next.js</strong> and <strong>Node.js</strong>, featuring user authentication, profile creation, interactive posts, real-time updates, and a fully responsive UI for seamless developer communication and collaboration.</li>
-                        </ul>
+                        <p class="font-bold text-slate-900">DevConnect – Developer Platform</p>
+                        <p class="text-slate-600 text-[10.5px]">LinkedIn-like platform with Next.js, Node.js, authentication, and real-time feed.</p>
                     </div>
-                    <!-- Project 2 -->
                     <div>
-                        <p class="font-bold text-gray-900 text-[13px] mb-1">Crazy.AI – AI Assistant</p>
-                        <ul class="list-disc pl-4 space-y-1 text-gray-700">
-                            <li>Developed a fully functional AI assistant using <strong>HTML, CSS, JavaScript, Next.js,</strong> and <strong>Node.js</strong>, capable of handling user queries, generating intelligent responses, and performing conversational tasks with a smooth and interactive user experience.</li>
-                        </ul>
+                        <p class="font-bold text-slate-900">Crazy.AI – Conversational Assistant</p>
+                        <p class="text-slate-600 text-[10.5px]">Interactive AI assistant web app built using JavaScript, Next.js, and Node.js API integration.</p>
                     </div>
-                    <!-- Project 3 -->
                     <div>
-                        <p class="font-bold text-gray-900 text-[13px] mb-1">Student Management System</p>
-                        <ul class="list-disc pl-4 space-y-1 text-gray-700">
-                            <li>Built a web-based student management system using <strong>C# (.NET)</strong> with HTML, CSS, and JavaScript, allowing users to efficiently add, update, delete, and view student records including names, IDs, courses, and grades through an interactive interface.</li>
-                        </ul>
+                        <p class="font-bold text-slate-900">Student Management System</p>
+                        <p class="text-slate-600 text-[10.5px]">C# (.NET) based CRUD application with clean database records management.</p>
                     </div>
-                    <!-- Project 4 -->
                     <div>
-                        <p class="font-bold text-gray-900 text-[13px] mb-1">Parallel Sorting Desktop Application</p>
-                        <ul class="list-disc pl-4 space-y-1 text-gray-700">
-                            <li>Designed and implemented a desktop application in <strong>Python</strong> that demonstrates and compares multiple parallel sorting algorithms, visualizing sorting performance and efficiency across different dataset sizes.</li>
-                        </ul>
-                    </div>
-                    <!-- Project 5 -->
-                    <div>
-                        <p class="font-bold text-gray-900 text-[13px] mb-1">Todo List App</p>
-                        <ul class="list-disc pl-4 space-y-1 text-gray-700">
-                            <li>Developed an interactive Todo List application using <strong>HTML5, CSS3,</strong> and JavaScript with features for adding, editing, deleting, and marking tasks as complete with local storage persistence.</li>
-                        </ul>
-                    </div>
-                    <!-- Project 6 -->
-                    <div>
-                        <p class="font-bold text-gray-900 text-[13px] mb-1">Music Player</p>
-                        <ul class="list-disc pl-4 space-y-1 text-gray-700">
-                            <li>Built a fully functional Music Player using <strong>HTML5, CSS3,</strong> and JavaScript with play, pause, skip, volume control, and playlist management features for an engaging user experience.</li>
-                        </ul>
-                    </div>
-                    <!-- Project 7 -->
-                    <div>
-                        <p class="font-bold text-gray-900 text-[13px] mb-1">Calculator App</p>
-                        <ul class="list-disc pl-4 space-y-1 text-gray-700">
-                            <li>Created an interactive Calculator application using <strong>HTML, CSS,</strong> and JavaScript supporting basic arithmetic operations with a clean, responsive interface.</li>
-                        </ul>
-                    </div>
-                    <!-- Project 8 -->
-                    <div>
-                        <p class="font-bold text-gray-900 text-[13px] mb-1">Image Gallery</p>
-                        <ul class="list-disc pl-4 space-y-1 text-gray-700">
-                            <li>Developed a responsive Image Gallery application using <strong>HTML, CSS,</strong> and JavaScript with image categorization, lightbox preview, and smooth navigation features.</li>
-                        </ul>
+                        <p class="font-bold text-slate-900">Parallel Sorting Analyzer</p>
+                        <p class="text-slate-600 text-[10.5px]">Python desktop app visualizing parallel sorting performance metrics across datasets.</p>
                     </div>
                 </div>
             </div>
@@ -463,5 +319,21 @@
         </div>
     </div>
 
+    <!-- PDF Download Script -->
+    <script>
+        function generatePDF() {
+            const element = document.getElementById('resume-container');
+            
+            const opt = {
+                margin:       0,
+                filename:     'Tousif_Ul_Islam_Resume.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, logging: false },
+                jsPDF:        { unit: 'px', format: [850, 1100], orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
 </body>
 </html>
