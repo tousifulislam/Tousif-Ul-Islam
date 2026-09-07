@@ -1,0 +1,82 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #090a0d;
+        overflow: hidden;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      iframe {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #090a0d;
+        display: block;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe
+      id="portfolioFrame"
+      src="portfolio-app.html"
+      title="Portfolio app"
+      loading="eager"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
+    ></iframe>
+
+    <script>
+      const frame = document.getElementById("portfolioFrame");
+
+      const fitFrame = () => {
+        frame.style.height = `${window.innerHeight}px`;
+      };
+
+      fitFrame();
+      window.addEventListener("resize", fitFrame);
+
+      document.addEventListener(
+        "contextmenu",
+        (event) => {
+          if (event.target && event.target.closest("iframe")) {
+            event.preventDefault();
+          }
+        },
+        true,
+      );
+
+      window.addEventListener("keydown", (event) => {
+        const blocked =
+          event.key === "F12" ||
+          (event.ctrlKey &&
+            event.shiftKey &&
+            ["I", "J", "C"].includes(event.key.toUpperCase())) ||
+          (event.ctrlKey && event.key.toLowerCase() === "u") ||
+          (event.metaKey &&
+            event.shiftKey &&
+            ["C", "I"].includes(event.key.toUpperCase()));
+
+        if (blocked) {
+          event.preventDefault();
+        }
+      });
+    </script>
+  </body>
+</html>
